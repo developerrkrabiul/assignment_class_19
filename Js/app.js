@@ -111,25 +111,22 @@ function viewDeveloper(id){
     let skill = document.getElementById('vskill');
     let vid = document.getElementById('vid');
 
-    let skillid = '';
+
+    axios.get(`http://localhost:5050/developers/${id}`).then(deves => {
+        
+        axios.get(`http://localhost:5050/skill/${id}`).then(res => {
+
+            skill.innerHTML = res.data.name;
+
+        name.innerHTML = deves.data.name;
+        email.innerHTML = deves.data.email;
+        vid.innerHTML = deves.data.id;
+        photo.setAttribute('src', deves.data.photo);
 
 
-    axios.get(`http://localhost:5050/developers/${id}`).then(res => {
-
-        name.innerHTML = res.data.name;
-        email.innerHTML = res.data.email;
-        skillid.innerHTML = res.data.skillId;
-        vid.innerHTML = res.data.id;
-        photo.setAttribute('src', res.data.photo);
-
-
-    });
-    axios.get(`http://localhost:5050/skill/${skillid}`).then(res => {
-
-        skill.innerHTML = res.data.name;
+        });
 
     });
-
 
 }
  /**
